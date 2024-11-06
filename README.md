@@ -1,25 +1,27 @@
-# Projeto de Backend com Python, Django e Docker
+# Projeto de Backend com Python, Django, FastAPI e Docker
 
-Este repositório contém um projeto backend desenvolvido como parte das aulas do MBA em Engenharia de Software da USP. O projeto utiliza **Python**, **Django** e **Docker**, seguindo as práticas recomendadas para desenvolvimento de APIs RESTful com deploy em contêineres.
+Este repositório contém um projeto backend desenvolvido como parte das aulas do MBA em Engenharia de Software da USP. O projeto utiliza **Python**, **Django**, **FastAPI**, e **Docker**, seguindo as práticas recomendadas para desenvolvimento de APIs RESTful e serviços rápidos, com deploy em contêineres.
 
 ## 📋 Descrição do Projeto
 
-Este projeto é um sistema básico de backend construído com o framework **Django**, com integração a um banco de dados, e preparado para ser executado em um ambiente **Dockerizado**. O objetivo é desenvolver habilidades em desenvolvimento backend e automação de ambientes de execução, com foco em escalabilidade e facilidade de deploy.
+Este projeto é um sistema backend completo, construído com os frameworks **Django** e **FastAPI**, integrados a um banco de dados e preparados para execução em um ambiente **Dockerizado**. O objetivo é proporcionar experiência tanto em desenvolvimento com Django quanto com FastAPI, oferecendo flexibilidade para construir APIs síncronas e assíncronas, com foco em escalabilidade e facilidade de deploy.
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **Python**: Linguagem de programação para o desenvolvimento backend.
-- **Django**: Framework web para construção de APIs e gerenciamento de rotas.
+- **Django**: Framework web para construção de APIs RESTful e gerenciamento de rotas.
+- **FastAPI**: Framework rápido e assíncrono, ideal para endpoints de alta performance.
 - **Docker**: Ferramenta para criação de contêineres, facilitando a implantação do ambiente.
-- **Docker Compose**: Para orquestrar múltiplos contêineres (como aplicação e banco de dados).
+- **Docker Compose**: Para orquestrar múltiplos contêineres (aplicação e banco de dados).
+- **PostgreSQL**: Banco de dados relacional integrado ao projeto via contêiner.
 
 ## 🚀 Funcionalidades
 
-- [ ] CRUD de exemplo (Criação, Leitura, Atualização e Exclusão).
+- [ ] CRUD de exemplo (Criação, Leitura, Atualização e Exclusão) com Django e FastAPI.
 - [ ] Endpoints para gerenciamento de recursos da aplicação.
-- [ ] Autenticação básica (opcional: Autenticação JWT).
+- [ ] Autenticação básica e (opcional) Autenticação JWT com FastAPI.
 - [ ] Integração com banco de dados PostgreSQL em contêiner Docker.
-  
+
 ## 📦 Estrutura do Projeto
 
 ```
@@ -28,7 +30,9 @@ Este projeto é um sistema básico de backend construído com o framework **Djan
 │   ├── manage.py            # Arquivo principal do Django
 │   ├── requirements.txt     # Dependências do projeto
 │   ├── settings.py          # Configurações do Django
-│   └── ...
+│   ├── fastapi_app/         # Pasta para endpoints e configurações do FastAPI
+│   │   ├── main.py          # Arquivo principal do FastAPI
+│   │   └── ...
 ├── docker-compose.yml       # Configuração para orquestrar os contêineres
 └── README.md                # Documentação do projeto
 ```
@@ -57,7 +61,7 @@ Certifique-se de ter os seguintes itens instalados:
    docker-compose up -d
    ```
 
-4. Acesse a aplicação no navegador em `http://localhost:8000` (ou outra porta configurada no `docker-compose.yml`).
+4. Acesse a aplicação Django no navegador em `http://localhost:8000` (ou outra porta configurada no `docker-compose.yml`) e a aplicação FastAPI na URL `http://localhost:8001/docs`, onde a documentação interativa estará disponível.
 
 5. Para ver os logs dos contêineres:
 
@@ -73,13 +77,13 @@ Certifique-se de ter os seguintes itens instalados:
 
 ## 📝 Comandos Úteis
 
-- **Criar Migrações**:
+- **Criar Migrações com Django**:
 
   ```bash
   docker-compose run app python manage.py makemigrations
   ```
 
-- **Aplicar Migrações**:
+- **Aplicar Migrações com Django**:
 
   ```bash
   docker-compose run app python manage.py migrate
@@ -90,6 +94,16 @@ Certifique-se de ter os seguintes itens instalados:
   ```bash
   docker-compose run app python manage.py createsuperuser
   ```
+
+- **Iniciar FastAPI**: O FastAPI inicia automaticamente ao rodar o `docker-compose up`, mas para rodar localmente, use:
+
+  ```bash
+  uvicorn fastapi_app.main:app --reload
+  ```
+
+## 📝 Configuração de Endpoints no FastAPI
+
+O arquivo `fastapi_app/main.py` é onde você poderá adicionar novos endpoints de forma assíncrona, usando a estrutura padrão do FastAPI. Acesse a documentação gerada automaticamente em `http://localhost:8001/docs`.
 
 ## 📄 Licença
 
